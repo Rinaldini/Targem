@@ -110,7 +110,6 @@ public:
 
 private:
     char* pointer;
-    //int length;
 };
 
 
@@ -119,8 +118,8 @@ private:
 int main() {
     
     vector<DynamicString> listOfString;
-    DynamicString   str("Hello"), 
-                    str1 = " world",
+    DynamicString   str("Cyrillic symbols"), 
+                    str1 = "is incorrect",
                     str2 = str;
     listOfString.push_back(str);
     listOfString.push_back(str1);
