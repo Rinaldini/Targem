@@ -29,15 +29,19 @@ Move - семантика: исходя из https://ru.wikipedia.org/wiki/Се�
 
 Т.о. класс будет такого вида:
 
+```c++
 class DynamicString {
 public:
-	DynamicString();
-	DynamicString(char * str);
-	~DynamicString();
+	DynamicString() // конструктор без параметров
+	DynamicString(char * str) // конструктор с параметрами
+	DynamicString(const DynamicString& other) // конструктор копированием
+	DynamicString(DynamicString&& other) // конструктор перемещением
+	~DynamicString(); // деструктор
 
 	int getLength(char * str);
 	
-	DynamicString& operator=(DynamicString &newStr);
+	DynamicString& operator=(const DynamicString& other) // оператор присваивания копированием
+	DynamicString& operator=(const DynamicString&& other) // оператор присваивания перемещением
 	ostream operator<<(ostream o, char * str);
 	istream operator>>(istream i, char * str);
 	bool operator<(char * str);
@@ -46,9 +50,10 @@ public:
 	bool operator>(char * str);
 
 private:
-	char * ptrCharString;
+	char * pointer;
 }
+```
 
 
-Сперва реализуем класс и программу-пример в одном файле.
+Сперва реализация класса и программы-примера в одном файле.
 Следующим этапом разнесём в разные файлы класс и пример.

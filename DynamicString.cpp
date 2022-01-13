@@ -52,6 +52,13 @@ public:
         pointer[length] = '\0';
     }
 
+    // Конструктор перемещения
+    DynamicString(DynamicString&& other) {
+        pointer = other.pointer;
+        other.pointer = nullptr;
+    }
+
+
     // деструктор
     ~DynamicString()
     {
@@ -98,7 +105,7 @@ public:
     }
 
     void Print() {
-        cout << pointer;
+        cout << pointer << endl;
     }
 
 private:
@@ -111,10 +118,17 @@ private:
 
 int main() {
     
-    //vector<string> listOfString;
-    DynamicString str("Hello");
-    DynamicString str1 = " world";
-    DynamicString str3 = str;
+    vector<DynamicString> listOfString;
+    DynamicString   str("Hello"), 
+                    str1 = " world",
+                    str2 = str;
+    listOfString.push_back(str);
+    listOfString.push_back(str1);
+    listOfString.push_back(str2);
+    for (auto item : listOfString) {
+        item.Print();
+    }
+
     //cout << getLength(str) << endl;
     
 }
