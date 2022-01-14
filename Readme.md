@@ -33,21 +33,21 @@ Move - семантика: исходя из https://ru.wikipedia.org/wiki/Се�
 class DynamicString {
 public:
 	DynamicString() // конструктор без параметров
-	DynamicString(char * str) // конструктор с параметрами
+	DynamicString(char * pointer) // конструктор с параметрами
 	DynamicString(const DynamicString& other) // конструктор копированием
 	DynamicString(DynamicString&& other) // конструктор перемещением
 	~DynamicString(); // деструктор
 
-	int getLength(char * str);
+	int getLength(char * pointer);
 	
 	DynamicString& operator=(const DynamicString& other) // оператор присваивания копированием
 	DynamicString& operator=(const DynamicString&& other) // оператор присваивания перемещением
-	ostream operator<<(ostream o, char * str);
-	istream operator>>(istream i, char * str);
-	bool operator<(char * str);
-	bool operator<=(char * str);
-	bool operator>=(char * str);
-	bool operator>(char * str);
+	ostream& operator<<(ostream& o, DynamicString  str);
+	istream& operator>>(istream& i, DynamicString& str);
+	bool operator<(const DynamicString& other);
+	bool operator<=(const DynamicString& other);
+	bool operator>=(const DynamicString& other);
+	bool operator>(const DynamicString& other);
 
 private:
 	char * pointer;
