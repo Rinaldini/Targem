@@ -1,4 +1,4 @@
-﻿/*  
+﻿/*
  *  Реализовать класс динамических строк, который:
  *  1. Написан на C++11 без каких либо сторонних библиотек.Не использует в своей
  *  основе какую - либо другую реализацию динамических строк, контейнеров или умных
@@ -16,10 +16,11 @@
  *  лексикографическому без учета регистра.
  *  Программа - пример работает из командной строки.
  *
- * 
+ *
  **/
 
 #include <iostream>
+#include <iomanip>
 #include <vector>
 //#include "DynamicString.h"
 using namespace std;
@@ -73,7 +74,7 @@ public:
 
         int length = GetLength(other.pointer);
         pointer = new char[length + 1];
-        
+
         for (int i = 0; i < length; i++) {
             pointer[i] = other.pointer[i];
         }
@@ -95,7 +96,7 @@ public:
         return *this;
     }
 
-
+    // длина строки
     int GetLength(const char* str) {
         int length = 0;
         while (str[length] != '\0') {
@@ -104,38 +105,43 @@ public:
         return length;
     }
 
-    void Print() {
-        cout << pointer << endl;
+    friend ostream& operator<<(ostream& o, const DynamicString& other) {
+        o << other.pointer;
+        return o;
+    }
+
+    friend istream& operator>>(istream& i, DynamicString& other) {
+        char temp[100];
+        i >> setw(100) >> temp;
+        other = temp;
+        return i;
     }
 
 private:
     char* pointer;
 };
 
-
-
-
 int main() {
-    
     vector<DynamicString> listOfString;
-    DynamicString   str("Cyrillic symbols"), 
-                    str1 = "is incorrect",
-                    str2 = str;
+    DynamicString str("Cyrillic symbols"),
+                  str1 = "is incorrect",
+                  str2 = str,
+                  str3;
+    cout << "Enter a string, please";
+    cin >> str3;
     listOfString.push_back(str);
     listOfString.push_back(str1);
     listOfString.push_back(str2);
+    listOfString.push_back(str3);
     for (auto item : listOfString) {
-        item.Print();
+        cout << item << endl;
     }
-
-    //cout << getLength(str) << endl;
-    
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
 
-// Советы по началу работы 
+// Советы по началу работы
 //   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
 //   2. В окне Team Explorer можно подключиться к системе управления версиями.
 //   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
