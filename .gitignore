@@ -4,4 +4,6 @@
 *.filters
 *.h
 .vs/
+*.exe
+*.o
 Debug/
