@@ -167,9 +167,25 @@ int main() {
     for (auto item : listOfString) {
         cout << item << " " << item.Length() << endl;
     }
-    //cout << "After sort" << endl;
     
-    // сортировка без учёта регистра
+    cout << "After sort" << endl;
+    
+    // сортировка в обратном порядке без учёта регистра
+    sort(listOfString.rbegin(), listOfString.rend(), [](DynamicString a, DynamicString b) {
+        for (int i = 0; i < min(a.Length(), b.Length()); i++) {
+            auto a_char = tolower(a[i]);
+            auto b_char = tolower(b[i]);
+            if (a_char != b_char) {
+                return a_char < b_char;
+            }
+        }
+        return a.Length() < b.Length();
+        });
+
+    // выводим отсорированный вектор
+    for (auto x : listOfString) {
+        cout << x << endl;
+    }
     
 }
 
