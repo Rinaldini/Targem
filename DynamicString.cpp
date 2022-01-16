@@ -22,6 +22,7 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <algorithm>
 //#include "DynamicString.h"
 using namespace std;
 
@@ -31,11 +32,12 @@ public:
     // конструктор без параметров
     DynamicString() {
         pointer = nullptr;
+        //length = 0;
     }
 
     // конструктор со списком инициализации и телом
     DynamicString(const char* str) {
-        int length = GetLength(str);
+        length = strlen(str);
         pointer = new char[length + 1];
         for (int i = 0; i < length; i++) {
             pointer[i] = str[i];
@@ -45,7 +47,7 @@ public:
 
     // конструктор копирования
     DynamicString(const DynamicString& other) {
-        int length = GetLength(other.pointer);
+        length = strlen(other.pointer);
         pointer = new char[length + 1];
         for (int i = 0; i < length; i++) {
             pointer[i] = other.pointer[i];
@@ -72,13 +74,11 @@ public:
             delete[] pointer;
         }
 
-        int length = GetLength(other.pointer);
+        length = strlen(other.pointer);
         pointer = new char[length + 1];
-
         for (int i = 0; i < length; i++) {
             pointer[i] = other.pointer[i];
         }
-
         pointer[length] = '\0';
 
         return * this;
@@ -96,13 +96,31 @@ public:
         return *this;
     }
 
-    // длина строки
-    int GetLength(const char* str) {
-        int length = 0;
-        while (str[length] != '\0') {
-            length++;
-        }
+    int Length() {
         return length;
+    }
+
+    bool operator==(const DynamicString& other) {
+        if (length != other.length) {
+            return false;
+        }
+        int size = 0;
+        length > other.length ? size = other.length : size = length;
+        for (int i = 0; i < size; i++) {
+            return (pointer[i] > other.pointer[i]);
+        }
+    }
+
+    bool operator>(const DynamicString& other) {
+        int size = 0;
+        length > other.length ? size = other.length : size = length;
+        for (int i = 0; i < size; i++) {
+            return (pointer[i] > other.pointer[i]);
+        }
+    }
+
+    bool operator<(const DynamicString& other) {
+        return !(operator>(other));
     }
 
     friend ostream& operator<<(ostream& o, const DynamicString& other) {
@@ -117,25 +135,42 @@ public:
         return i;
     }
 
+    char& operator [](int index) {
+        return pointer[index];
+    }
+
 private:
     char* pointer;
+    int length;
 };
+
+
 
 int main() {
     vector<DynamicString> listOfString;
-    DynamicString str("Cyrillic symbols"),
-                  str1 = "is incorrect",
-                  str2 = str,
-                  str3;
-    cout << "Enter a string, please";
-    cin >> str3;
+    DynamicString str("Aaa"),
+                  str1 = "aaa",
+                  str2 = "adc",
+                  str3 = "abc cba",
+                  str4 = "bcacba",
+                  str5 = str,
+                  str6;
+    cout << "Enter a string, please" << endl;
+    cin >> str6;
     listOfString.push_back(str);
     listOfString.push_back(str1);
     listOfString.push_back(str2);
     listOfString.push_back(str3);
+    listOfString.push_back(str4);
+    listOfString.push_back(str5);
+    listOfString.push_back(str6);
     for (auto item : listOfString) {
-        cout << item << endl;
+        cout << item << " " << item.Length() << endl;
     }
+    //cout << "After sort" << endl;
+    
+    // сортировка без учёта регистра
+    
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
