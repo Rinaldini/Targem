@@ -71,6 +71,10 @@ bool DynamicString::operator==(const DynamicString& other) {
     return strcmp(pointer, other.pointer);
 }
 
+bool DynamicString::operator!=(const DynamicString& other) {
+    return !(operator==(other));
+}
+
 bool DynamicString::operator<(const DynamicString& other) {
     return strcmp(pointer, other.pointer) < 0;
 }
@@ -85,7 +89,10 @@ ostream& operator<<(ostream& o, DynamicString& other) {
 }
 istream& operator>>(istream& i, DynamicString& other) {
     char temp[100];
-    i >> setw(100) >> temp;
-    other = temp;
+//    i >> setw(100) >> temp;
+    i.get(temp, 100);
+    if (i) {other = temp;}
+    while (i && i.get() != '\n')
+        continue;
     return i;
 }

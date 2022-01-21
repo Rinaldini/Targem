@@ -24,28 +24,21 @@
 using namespace std;
 
 int main() {
+    //int countOfString = 3;
+    DynamicString str;
     vector<DynamicString> listOfString;
-    DynamicString str("Aaa"),
-                  str1 = "aaa",
-                  str2 = "adc",
-                  str3 = "abc cba",
-                  str4 = "bcacba",
-                  str5 = str,
-                  str6;
-    cout << "Enter a string, please" << endl;
-    cin >> str6;
-    listOfString.push_back(str);
-    listOfString.push_back(str1);
-    listOfString.push_back(str2);
-    listOfString.push_back(str3);
-    listOfString.push_back(str4);
-    listOfString.push_back(str5);
-    listOfString.push_back(str6);
+
+    cout << "Input a few lines, please. If you are done, just press Enter" << endl;
+    while (cin.get() != '\n') {
+        cin >> str;
+        listOfString.push_back(str);
+    }
+
     for (auto item : listOfString) {
         cout << item << " " << item.Length() << endl;
     }
 
-    cout << "After sort" << endl;
+    cout << endl << "After sort" << endl << endl;
 
     // сортировка в обратном порядке без учёта регистра
     sort(listOfString.rbegin(), listOfString.rend(), [](DynamicString a, DynamicString b) {
