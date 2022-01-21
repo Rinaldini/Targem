@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1642581507 source:c:\mydocs\targem\dynamicstring\dynamicstring.cpp
+	<iostream>
+	<cstring>
+	<iomanip>
+	"DynamicString.h"
+
+1642580130 c:\mydocs\targem\dynamicstring\dynamicstring.h
+	<iostream>
+
+1642578017 source:c:\mydocs\targem\dynamicstring\main.cpp
+	<vector>
+	<algorithm>
+	"DynamicString.h"
+
