@@ -1,16 +1,22 @@
 #include <cstring>
 #include <iomanip>
 #include "DynamicString.h"
+
+
 using namespace std;
 
+
 // конструктор без параметров
-DynamicString::DynamicString() {
+DynamicString::DynamicString()
+{
     pointer = nullptr;
     length = 0;
 }
 
+
 // конструктор со списком инициализации и телом
-DynamicString::DynamicString(const char* str) {
+DynamicString::DynamicString(const char* str)
+{
     length = strlen(str);
     pointer = new char[length + 1];
     for (int i = 0; i < length; i++) {
@@ -19,18 +25,23 @@ DynamicString::DynamicString(const char* str) {
     pointer[length] = '\0';
 }
 
+
 // конструктор копирования
-DynamicString::DynamicString(const DynamicString& other) {
+DynamicString::DynamicString(const DynamicString& other)
+{
     length = strlen(other.pointer);
     pointer = new char[length + 1];
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < length; i++)
+    {
         pointer[i] = other.pointer[i];
     }
     pointer[length] = '\0';
 }
 
+
 // Конструктор перемещения
-DynamicString::DynamicString(DynamicString&& other) {
+DynamicString::DynamicString(DynamicString&& other)
+{
     pointer = other.pointer;
     other.pointer = nullptr;
 }
@@ -42,23 +53,30 @@ DynamicString::~DynamicString()
     delete[] pointer;
 }
 
+
 // оператор присваивания копированием
-DynamicString& DynamicString::operator=(const DynamicString& other) {
-    if (pointer != nullptr) {
+DynamicString& DynamicString::operator=(const DynamicString& other)
+{
+    if (pointer != nullptr)
+    {
         delete[] pointer;
     }
     length = strlen(other.pointer);
     pointer = new char[length + 1];
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < length; i++)
+    {
         pointer[i] = other.pointer[i];
     }
     pointer[length] = '\0';
     return * this;
 }
 
+
 // оператор присваивания перемещением
-DynamicString& DynamicString::operator=(DynamicString&& other) {
-    if (this == &other) {
+DynamicString& DynamicString::operator=(DynamicString&& other)
+{
+    if (this == &other)
+    {
         return *this;
     }
     delete[] pointer;
@@ -67,29 +85,41 @@ DynamicString& DynamicString::operator=(DynamicString&& other) {
     return *this;
 }
 
-bool DynamicString::operator==(const DynamicString& other) {
+
+bool DynamicString::operator==(const DynamicString& other)
+{
     return strcmp(pointer, other.pointer);
 }
 
-bool DynamicString::operator!=(const DynamicString& other) {
+
+bool DynamicString::operator!=(const DynamicString& other)
+{
     return !(operator==(other));
 }
 
-bool DynamicString::operator<(const DynamicString& other) {
+
+bool DynamicString::operator<(const DynamicString& other)
+{
     return strcmp(pointer, other.pointer) < 0;
 }
 
-bool DynamicString::operator>(const DynamicString& other) {
+
+bool DynamicString::operator>(const DynamicString& other)
+{
     return !(operator<(other));
 }
 
-ostream& operator<<(ostream& o, DynamicString& other) {
+
+ostream& operator<<(ostream& o, DynamicString& other)
+{
     o << other.pointer;
     return o;
 }
-istream& operator>>(istream& i, DynamicString& other) {
+
+
+istream& operator>>(istream& i, DynamicString& other)
+{
     char temp[100];
-//    i >> setw(100) >> temp;
     i.get(temp, 100);
     if (i) {other = temp;}
     while (i && i.get() != '\n')

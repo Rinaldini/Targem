@@ -7,4 +7,4 @@
 *.exe
 *.o
 Debug/
-DynamicString/*.*
+DynamicString/
