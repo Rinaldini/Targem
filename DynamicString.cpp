@@ -1,5 +1,6 @@
+#include <iostream>
 #include <cstring>
-#include <iomanip>
+//#include <iomanip>
 #include "DynamicString.h"
 
 
@@ -44,13 +45,6 @@ DynamicString::DynamicString(DynamicString&& other)
 {
     pointer = other.pointer;
     other.pointer = nullptr;
-}
-
-
-// деструктор
-DynamicString::~DynamicString()
-{
-    delete[] pointer;
 }
 
 
@@ -110,7 +104,7 @@ bool DynamicString::operator>(const DynamicString& other)
 }
 
 
-ostream& operator<<(ostream& o, DynamicString& other)
+ostream& operator<<(ostream& o, const DynamicString& other)
 {
     o << other.pointer;
     return o;
@@ -119,9 +113,13 @@ ostream& operator<<(ostream& o, DynamicString& other)
 
 istream& operator>>(istream& i, DynamicString& other)
 {
-    char temp[100];
-    i.get(temp, 100);
-    if (i) {other = temp;}
+    char temp[80];
+    i.get(temp, 80);
+    if (i)
+    {
+        //i >> temp;
+        other = temp;
+    }
     while (i && i.get() != '\n')
         continue;
     return i;
