@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstring>
-//#include <iomanip>
 #include "DynamicString.h"
 
 
@@ -117,10 +116,11 @@ istream& operator>>(istream& i, DynamicString& other)
     i.get(temp, 80);
     if (i)
     {
-        //i >> temp;
-        other = temp;
+         other = temp;
     }
     while (i && i.get() != '\n')
+    {
         continue;
+    }
     return i;
 }
