@@ -10,16 +10,16 @@ private:
     char* pointer;
     int length;
 public:
-    DynamicString(); // конструктор без параметров
-    DynamicString(const char* str); // конструктор со списком инициализации и телом
-    DynamicString(const DynamicString& other); // конструктор копирования
-    DynamicString(DynamicString&& other); // Конструктор перемещения
+    DynamicString(); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ
+    DynamicString(const char* str); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃРѕ СЃРїРёСЃРєРѕРј РёРЅРёС†РёР°Р»РёР·Р°С†РёРё Рё С‚РµР»РѕРј
+    DynamicString(const DynamicString& other); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
+    DynamicString(DynamicString&& other); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРµСЂРµРјРµС‰РµРЅРёСЏ
 
-    // деструктор
+    // Г¤ГҐГ±ГІГ°ГіГЄГІГ®Г°
     ~DynamicString() {delete[] pointer;}
 
-    DynamicString& operator=(const DynamicString& other); // оператор присваивания копированием
-    DynamicString& operator=(DynamicString&& other); // оператор присваивания перемещением
+    DynamicString& operator=(const DynamicString& other); // РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ РєРѕРїРёСЂРѕРІР°РЅРёРµРј
+    DynamicString& operator=(DynamicString&& other); // РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ РїРµСЂРµРјРµС‰РµРЅРёРµРј
 
     int Length() {return length;}
     char& operator[](int index) {return pointer[index];}
